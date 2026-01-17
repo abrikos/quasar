@@ -34,6 +34,7 @@ jobs:
           script: |
             cd ~/quasar
             git pull
+            ls -l
             npm i
             quasar build
 
