@@ -12,7 +12,7 @@ export interface ICredentials {
 
 
 const userStore = useAuthStore()
-const credentials = ref<ICredentials>({email:'test211@b.com',password:'1'})
+const credentials = ref<ICredentials>({email:'abrikoz@gmail.com',password:'1'})
 
 async function login(){
   const user = await userStore.login(credentials.value)

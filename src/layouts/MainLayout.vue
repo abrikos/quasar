@@ -15,13 +15,13 @@
           q-item-section
             q-item-label {{ link.title }}
             q-item-label( caption) {{ link.caption }}
-        q-item(v-if="userStore.user?.is_staff" to="/post-edit")
+        q-item(v-if="userStore.user?.publisher" to="/post-edit")
           q-item-section(avatar)
             q-icon(name="edit")
           q-item-section
             q-item-label Add post
         div(v-if="userStore.user")
-          q-btn(@click="userStore.logout"  flat) Sign out
+          q-btn(@click="logout"  flat) Sign out
           q-btn(to="/cabinet" flat) {{userStore.user?.email}}
         div( v-else)
           q-btn(to="/login" flat) Sign in
@@ -37,10 +37,16 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useAuthStore } from 'stores/auth-store';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const userStore = useAuthStore();
 
-async function logout() {}
+async function logout() {
+  await router.push('/login')
+  userStore.logout()
+
+}
 
 const linksList = [
   {

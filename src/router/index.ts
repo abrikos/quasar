@@ -35,9 +35,12 @@ export default defineRouter(function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach(async (to, from) => {
+    const authPages = ['/cabinet']
     const authStore = useAuthStore();
-    await authStore.checkAuth()
-    return true
+    const user = await authStore.checkAuth()
+    if(authPages.includes(to.path) && !user) {
+      return {path: '/login'};
+    }
   })
 
   return Router;

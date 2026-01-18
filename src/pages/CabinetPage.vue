@@ -21,6 +21,12 @@ async function updateUser(deleteAvatar:boolean) {
   $q.notify({ message: res.data.status, color: 'green' });
 }
 
+async function setPassword() {
+  if (!userStore.user) return;
+  const res = await axios.patch(`/user/${userStore.user.id}/set_password`, credentials.value);
+  $q.notify({ message: res.data.status, color: 'green' });
+}
+
 async function setAvatar(file: string) {
   if (!userStore.user) return;
   const res = await axios.post(`/user/${userStore.user.id}/set_avatar/`, file, {

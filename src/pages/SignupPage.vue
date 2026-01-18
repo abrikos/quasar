@@ -8,7 +8,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const errors = ref({});
-const credentials = ref<ICredentials>({ email: Math.random() + '@gg.com', password: '1' });
+const credentials = ref<ICredentials>({ email: Math.random()+'@gmail.com', password: '1', password2:'1' });
 
 async function signup() {
   const auth = useAuthStore();

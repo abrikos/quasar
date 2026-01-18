@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { Cookies, Notify } from 'quasar';
 
+const auth = Cookies.get('auth');
+const Authorization = auth ? `Bearer ${auth}` : null;
+
 const instance = axios.create({
-  baseURL: '/api',
-  headers: { CSRFToken: Cookies.get('csrftoken'), Authorization: 'Bearer ' + Cookies.get('auth') },
+  baseURL: import.meta.env.DEV ? 'http://localhost:8000/api' : '/api',
 });
 instance.interceptors.response.use(
   (res) => {
@@ -14,10 +16,21 @@ instance.interceptors.response.use(
     if (error.response?.status === 401) {
       return;
     }
-    console.log(error.response.data)
+    console.log(error.response.data);
     Notify.create({ message: JSON.stringify(error.response.data), color: 'red' });
     return { data: { error: error.response.data } };
   },
 );
 
-export default instance;
+const authHeaders = () => ({
+  Authorization: Cookies.get('auth') ? `Bearer ${Cookies.get('auth')}` : null,
+});
+
+export default {
+  post(url: string, data: object) {
+    return instance.post(url, data, { headers: authHeaders() });
+  },
+  get(url: string) {
+    return instance.get(url, { headers: authHeaders() });
+  },
+};

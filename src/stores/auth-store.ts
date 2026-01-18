@@ -33,17 +33,18 @@ export const useAuthStore = defineStore('auth', {
     },
     async signup(credentials: ICredentials) {
       const user = await axios.post('/user/', credentials);
-      if (!user.data.error) {
+      if (user && !user.data.error) {
         await this.login(credentials);
       }
       return user;
     },
     async checkAuth() {
-      const auth = Cookies.get('auth');
-      const user = await axios.get('/user/auth' );
+      const user = await axios.get('/user/auth');
       if(user && !user.data.erors) {
         this.user = user.data;
         return this.user;
+      }else{
+        Cookies.set('auth', '');
       }
     },
     logout() {
