@@ -29,11 +29,7 @@ async function setPassword() {
 
 async function setAvatar(file: string) {
   if (!userStore.user) return;
-  const res = await axios.post(`/user/${userStore.user.id}/set_avatar/`, file, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const res = await axios.upload(`/user/${userStore.user.id}/set_avatar/`, file);
   $q.notify({ message: res.data.status, color: 'green' });
 }
 </script>
@@ -51,7 +47,6 @@ async function setAvatar(file: string) {
       q-input(v-model="userStore.user.last_name" label="Last Name" )
       q-file
       q-btn(type="submit") Save
-
     user-avatar(:user="userStore.user")
     q-btn(@click="updateUser(true)") Delete
     q-uploader(url="" @added="setAvatar")

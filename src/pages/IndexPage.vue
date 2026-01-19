@@ -1,23 +1,15 @@
 <template lang="pug">
-  q-page.row.items-center.justify-evenly
-    q-card(v-for="post in posts")
-      q-toolbar
-        q-toolbar-title
-          q-avatar
-            user-avatar(:user="post.user")
-          q-btn(:to="`/post-view/${post.id}`" flat no-caps) {{ post.title }}
-      q-card-section {{ post.short }}
-        small {{ post.created_at }}
-        small {{ post.published }}
-      q-card-actions
-        q-btn(size="sm" icon="edit" v-if="userStore.user?.id === post.user.id" :to="`/post-edit/${post.id}`")
+  q-page
+    div.row.items-center.justify-evenly
+      div.col(v-for="post in posts" )
+        post-card.col(:post="post")
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import axios from 'src/plugins/axios';
-import UserAvatar from 'components/UserAvatar.vue';
 import { useAuthStore } from 'stores/auth-store';
+import PostCard from 'components/PostCard.vue';
 
 const userStore = useAuthStore();
 const posts = ref([]);

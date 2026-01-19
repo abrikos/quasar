@@ -99,8 +99,13 @@ export default defineConfig((ctx) => {
     devServer: {
       // https: true,
       //port: 4000,
+      host:'abrikosio.local',
       open: false, // opens browser window automatically
+      allowedHosts: [
+        'abrikosio.local', // Example hostname
+      ],
     },
+
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {

@@ -30,6 +30,14 @@ export default {
   post(url: string, data: object) {
     return instance.post(url, data, { headers: authHeaders() });
   },
+  upload(url: string, data: string) {
+    return instance.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('auth')}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
   patch(url: string, data: object) {
     return instance.patch(url, data, { headers: authHeaders() });
   },

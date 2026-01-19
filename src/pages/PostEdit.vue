@@ -42,16 +42,20 @@ async function onSubmit() {
 </script>
 
 <template lang="pug">
-  div.row
-    div.col-sm
+  div.row.q-gutter-md
+    div.col-sm.q-pa-lg
       q-form(@submit="onSubmit")
-        q-input(v-model="post.title" label="Title")
-        q-input(v-model="post.short" label="Short" type="textarea")
-        q-input(v-model="post.body" label="Body" type="textarea")
+        q-input(v-model="post.title" label="Title" dense outlined)
+        br
+        q-input(v-model="post.short" label="Short" type="textarea" dense outlined)
+        br
+        q-input(v-model="post.body" label="Body" type="textarea" filled autogrow dense outlined)
+        a(href="https://skillbox.ru/media/code/yazyk-razmetki-markdown-shpargalka-po-sintaksisu-s-primerami/" target="_blank") Mark down rules
         q-toggle( v-model="post.published" label="Published")
-        div {{ post.created_at  }}
+        div {{ post.date  }}
         q-btn(type="submit") Save
     div.col-sm
+
       post-view(:post="post")
 </template>
 
