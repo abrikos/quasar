@@ -8,6 +8,7 @@
           q-btn(:to="`/post-view/${post.id}`" flat no-caps) {{ post.title }}
       q-card-section {{ post.short }}
         small {{ post.created_at }}
+        small {{ post.published }}
       q-card-actions
         q-btn(size="sm" icon="edit" v-if="userStore.user?.id === post.user.id" :to="`/post-edit/${post.id}`")
 </template>
@@ -24,6 +25,8 @@ const userStore = useAuthStore();
 const posts = ref([]);
 onMounted(async () => {
   const res = await axios.get(`/post/`);
-  posts.value = res.data;
+  if (!res.data.error) {
+    posts.value = res.data;
+  }
 });
 </script>

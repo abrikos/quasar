@@ -41,7 +41,6 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const userStore = useAuthStore();
-
 async function logout() {
   await router.push('/login')
   userStore.logout()

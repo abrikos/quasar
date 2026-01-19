@@ -30,6 +30,9 @@ export default {
   post(url: string, data: object) {
     return instance.post(url, data, { headers: authHeaders() });
   },
+  patch(url: string, data: object) {
+    return instance.patch(url, data, { headers: authHeaders() });
+  },
   get(url: string) {
     return instance.get(url, { headers: authHeaders() });
   },
