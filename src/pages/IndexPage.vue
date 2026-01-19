@@ -15,8 +15,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import type { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
 import axios from 'src/plugins/axios';
 import UserAvatar from 'components/UserAvatar.vue';
 import { useAuthStore } from 'stores/auth-store';

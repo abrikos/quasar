@@ -4,9 +4,8 @@ import { useAuthStore } from 'stores/auth-store';
 import { useQuasar } from 'quasar';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
-
-
+import MarkDown from 'components/MarkDown.vue';
+import PostView from 'components/PostView.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -40,18 +39,20 @@ async function onSubmit() {
     }
   }
 }
-
 </script>
 
 <template lang="pug">
-  q-form(@submit="onSubmit")
-    q-input(v-model="post.title" label="Title")
-    q-input(v-model="post.short" label="Short" type="textarea")
-    q-input(v-model="post.body" label="Body" type="textarea")
-    q-toggle( v-model="post.published" label="Published")
-    div {{ post.created_at  }}
-    q-btn(type="submit") Save
-  div(v-html="renderedMarkdown")
+  div.row
+    div.col-sm
+      q-form(@submit="onSubmit")
+        q-input(v-model="post.title" label="Title")
+        q-input(v-model="post.short" label="Short" type="textarea")
+        q-input(v-model="post.body" label="Body" type="textarea")
+        q-toggle( v-model="post.published" label="Published")
+        div {{ post.created_at  }}
+        q-btn(type="submit") Save
+    div.col-sm
+      post-view(:post="post")
 </template>
 
 <style scoped></style>
