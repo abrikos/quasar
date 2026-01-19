@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MarkDown from 'components/MarkDown.vue';
 
-const {post} = withDefaults(defineProps<{ post: object }>(), {
+const props = withDefaults(defineProps<{ post: object }>(), {
   post: () => ({}),
 });
 
@@ -9,7 +9,7 @@ const {post} = withDefaults(defineProps<{ post: object }>(), {
 
 <template lang="pug">
 h1 {{ post.title }}
-mark-down.short(:text="post.short")
+p.short {{post.short}}
 mark-down(:text="post.body")
 //p.body(v-html="post.markdown_body")
 </template>

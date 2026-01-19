@@ -17,10 +17,10 @@ const {post} = withDefaults(defineProps<{ post: object }>(), {
         q-avatar
           user-avatar(:user="post.user")
         q-btn(:to="`/post-view/${post.id}`" flat no-caps) {{ post.title }}
-    q-card-section
-      mark-down.short(:text="post.short")
+    q-card-section(horizontal)
+      p.short {{post.short}}
+    q-card-actions.flex.justify-between
       small {{ post.date }}
-    q-card-actions
       q-btn(size="sm" icon="edit" v-if="userStore.user?.id === post.user.id" :to="`/post-edit/${post.id}`")
 
 </template>

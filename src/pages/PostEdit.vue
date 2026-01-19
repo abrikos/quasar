@@ -47,6 +47,8 @@ async function onSubmit() {
       q-form(@submit="onSubmit")
         q-input(v-model="post.title" label="Title" dense outlined)
         br
+        q-input(v-model="post.poster" label="Poster image url" dense outlined)
+        br
         q-input(v-model="post.short" label="Short" type="textarea" dense outlined)
         br
         q-input(v-model="post.body" label="Body" type="textarea" filled autogrow dense outlined)
