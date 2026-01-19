@@ -6,7 +6,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 import routes from './routes';
-import {useAuthStore} from "stores/auth-store";
+import { useAuthStore } from 'stores/auth-store';
 
 /*
  * If not building with SSR mode, you can
@@ -35,14 +35,19 @@ export default defineRouter(function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach(async (to, from) => {
-    const authPages = ['/cabinet']
+    const authPages = ['/cabinet'];
     const authStore = useAuthStore();
-    if(authPages.includes(to.path) || !authStore.user) {
-      const user = await authStore.checkAuth()
-      if(!user)
-        return {path: '/login'};
+
+    if (authPages.includes(to.path)) {
+      if (!authStore.user) {
+        console.log('zzzzzzzzzzz', to.path, authPages.includes(to.path), !authStore.user);
+        const user = await authStore.checkAuth();
+        if(!user) {
+          return { path: '/login' };
+        }
+      }
     }
-  })
+  });
 
   return Router;
 });
